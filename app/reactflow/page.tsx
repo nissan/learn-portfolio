@@ -1,37 +1,43 @@
-
 "use client";
-import React, { useCallback } from 'react';
+import React, { useCallback } from "react";
 import ReactFlow, {
     MiniMap,
     Controls,
     Background,
-    useNodesState, useEdgesState, addEdge,
-    Node, NodeToolbar, NodeResizer
-} from 'reactflow';
-import 'reactflow/dist/style.css';
-export const runtime = 'edge' // 'nodejs' (default) | 'edge'
+    useNodesState,
+    useEdgesState,
+    addEdge,
+    Node,
+    NodeToolbar,
+    NodeResizer, NodeResizeControl,
+    ReactFlowProvider
+} from "reactflow";
+import "reactflow/dist/style.css";
+export const runtime = "edge"; // "nodejs" (default) | "edge"
 
 const initialNodes = [
     {
-        id: '1',
+        id: "1",
         position: {
-            x: 0, y: 0
+            x: 0,
+            y: 0
         },
-        data: { label: 'Node 1' }
+        data: { label: "Node 1" }
     },
     {
-        id: '2',
+        id: "2",
         position: {
-            x: 0, y: 100
+            x: 0,
+            y: 100
         },
-        data: { label: 'Node 2' }
+        data: { label: "Node 2" }
     },
 ];
 const initialEdges = [
     {
-        id: 'e1-2',
-        source: '1',
-        target: '2'
+        id: "e1-2",
+        source: "1",
+        target: "2"
     }
 ];
 
@@ -49,16 +55,15 @@ function ReactFlowPage() {
             els.concat([
                 {
                     id: getId(),
-                    data: { label: 'New Node' },
+                    data: { label: "New Node" },
                     position: { x: Math.random() * window.innerWidth, y: Math.random() * window.innerHeight },
                 },
             ])
         );
     };
     return (
-        <div>
+        <ReactFlowProvider>
             <h2>Sample is here.</h2>
-            <button onClick={onAdd}>Add node</button>
 
             <div style={{ width: '100vw', height: '100vh' }}>
                 <ReactFlow
@@ -67,22 +72,29 @@ function ReactFlowPage() {
                     onNodesChange={onNodesChange}
                     onEdgesChange={onEdgesChange}
                     onConnect={onConnect}
+                    minZoom={0.2}
+                    maxZoom={4}
+                    fitView={true}
                 >
                     {nodes.map((node) => (
-                        <div key={node.id}>
-                            <NodeToolbar nodeId={node.id} />
-                            <NodeResizer nodeId={node.id} />
-                        </div>
+                        <>
+                            <NodeToolbar
+                                nodeId={node.id}
+                            >
+                                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-4 border border-blue-700" onClick={onAdd}>Add node</button>
+
+                                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-4 border border-blue-700">Save</button>{' '}
+                                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-4 border border-blue-700">Delete</button>
+                            </NodeToolbar>
+                            <NodeResizer nodeId={node.id} isVisible={true} />
+                        </>
                     ))}
                     <Controls />
                     <MiniMap />
                     <Background />
-                    <NodeToolbar />
-                    <NodeResizer />
-
                 </ReactFlow>
             </div>
-        </div>
+        </ReactFlowProvider>
     )
 }
 
