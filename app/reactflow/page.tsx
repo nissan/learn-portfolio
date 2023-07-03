@@ -8,7 +8,7 @@ import ReactFlow, {
     useNodesState, useEdgesState, addEdge
 } from 'reactflow';
 import 'reactflow/dist/style.css';
-export const runtime = 'edge' // 'nodejs' (default) | 'edge'
+// export const runtime = 'edge' // 'nodejs' (default) | 'edge'
 
 const initialNodes = [
     {
@@ -51,10 +51,11 @@ function ReactFlowPage() {
                     onNodesChange={onNodesChange}
                     onEdgesChange={onEdgesChange}
                     onConnect={onConnect}
-                />
-                <Controls />
-                <MiniMap />
-                <Background />
+                >
+                    <Controls />
+                    <MiniMap />
+                    <Background />
+                </ReactFlow>
             </div>
         </div>
     )
