@@ -1,5 +1,10 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# My Learning Portfolio
+This is a repository I created to experiment while showcasing the bits of tech I am learning about while focused on building out a NextJS app commercially. The rest of the documentation is standard boilerplate for now. This site is automatically deployed to Vercel when a commit is made to `main`
 
+## Learnings so far
+- Reactflow
+- Zustand
+- 
 ## Getting Started
 
 First, run the development server:
@@ -12,13 +17,7 @@ yarn dev
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
 
 To learn more about Next.js, take a look at the following resources:
 
