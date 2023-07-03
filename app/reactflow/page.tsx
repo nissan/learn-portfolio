@@ -5,10 +5,11 @@ import ReactFlow, {
     MiniMap,
     Controls,
     Background,
-    useNodesState, useEdgesState, addEdge
+    useNodesState, useEdgesState, addEdge,
+    Node, NodeToolbar, NodeResizer
 } from 'reactflow';
 import 'reactflow/dist/style.css';
-// export const runtime = 'edge' // 'nodejs' (default) | 'edge'
+export const runtime = 'edge' // 'nodejs' (default) | 'edge'
 
 const initialNodes = [
     {
@@ -34,16 +35,31 @@ const initialEdges = [
     }
 ];
 
+let id = 0;
+const getId = () => `d${id++}`;
+
 function ReactFlowPage() {
     const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
     const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
     const onConnect =
         useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
-
+    const onAdd = () => {
+        setNodes((els) =>
+            els.concat([
+                {
+                    id: getId(),
+                    data: { label: 'New Node' },
+                    position: { x: Math.random() * window.innerWidth, y: Math.random() * window.innerHeight },
+                },
+            ])
+        );
+    };
     return (
-        <div>ReactFlowPage
+        <div>
             <h2>Sample is here.</h2>
+            <button onClick={onAdd}>Add node</button>
+
             <div style={{ width: '100vw', height: '100vh' }}>
                 <ReactFlow
                     nodes={nodes}
@@ -52,9 +68,18 @@ function ReactFlowPage() {
                     onEdgesChange={onEdgesChange}
                     onConnect={onConnect}
                 >
+                    {nodes.map((node) => (
+                        <div key={node.id}>
+                            <NodeToolbar nodeId={node.id} />
+                            <NodeResizer nodeId={node.id} />
+                        </div>
+                    ))}
                     <Controls />
                     <MiniMap />
                     <Background />
+                    <NodeToolbar />
+                    <NodeResizer />
+
                 </ReactFlow>
             </div>
         </div>
