@@ -13,6 +13,8 @@ import ReactFlow, {
     ReactFlowProvider
 } from "reactflow";
 import "reactflow/dist/style.css";
+import ColorWheel from "./color-wheel";
+import { MdCreate, MdDelete, MdSearch, MdUpdate, MdVisibility } from "react-icons/md";
 export const runtime = "edge"; // "nodejs" (default) | "edge"
 
 const initialNodes = [
@@ -44,6 +46,8 @@ const initialEdges = [
 let id = 0;
 const getId = () => `d${id++}`;
 
+
+
 function ReactFlowPage() {
     const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
     const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
@@ -56,11 +60,19 @@ function ReactFlowPage() {
                 {
                     id: getId(),
                     data: { label: "New Node" },
-                    position: { x: Math.random() * window.innerWidth, y: Math.random() * window.innerHeight },
+                    position: { x: 100, y: 100 },
                 },
             ])
         );
     };
+
+    const operations = [
+        { name: 'create', icon: <MdCreate size={24} />, action: onAdd },
+        { name: 'read', icon: <MdVisibility size={24} /> },
+        { name: 'update', icon: <MdUpdate size={24} /> },
+        { name: 'delete', icon: <MdDelete size={24} /> },
+        { name: 'search', icon: <MdSearch size={24} /> },
+    ];
     return (
         <ReactFlowProvider>
             <h2>Sample is here.</h2>
@@ -81,10 +93,9 @@ function ReactFlowPage() {
                             <NodeToolbar
                                 nodeId={node.id}
                             >
-                                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-4 border border-blue-700" onClick={onAdd}>Add node</button>
-
-                                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-4 border border-blue-700">Save</button>{' '}
-                                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-4 border border-blue-700">Delete</button>
+                                <ColorWheel
+                                    operations={operations}
+                                />
                             </NodeToolbar>
                             <NodeResizer nodeId={node.id} isVisible={true} />
                         </>
