@@ -30,6 +30,8 @@ export default function Home() {
               priority
             />
           </span>
+          
+          <Link href="https://github.com/nissan">Who am I?</Link>
         </div>
       </div>
 

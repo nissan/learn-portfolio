@@ -1,5 +1,7 @@
 # My Learning Portfolio
-This is a repository I created to experiment while showcasing the bits of tech I am learning about while focused on building out a NextJS app commercially. The rest of the documentation is standard boilerplate for now. This site is automatically deployed to Vercel when a commit is made to `main`
+This is a repository I created to experiment while showcasing the bits of tech I am learning about while focused on building out a NextJS app commercially. 
+
+The rest of the documentation is standard boilerplate for now. This site is automatically [deployed to Vercel](https://learn-portfolio.vercel.app/) when a commit is made to `main`
 
 ## Learnings so far
 - Reactflow
